@@ -113,6 +113,10 @@ const RealQuoteDiv = styled.div`
   align-items: center;
   padding: 0 20px;
   text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 15px;
+  }
 `;
 
 const AnimatedText = styled.p`
@@ -133,6 +137,10 @@ const RandomButton = styled.button`
   outline: none;
   ::-moz-focus-inner {
     border: 0;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 12px;
   }
 `;
 
