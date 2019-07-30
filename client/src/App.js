@@ -87,6 +87,11 @@ const FullDiv = styled.div`
   right: calc(50% - 250px);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 14px;
+
+  @media (max-width: 600px) {
+    width: 300px;
+    right: calc(50% - 150px);
+  }
 `;
 
 const QuoteDiv = styled.div`
@@ -115,7 +120,7 @@ const AnimatedText = styled.p`
 `;
 
 const RandomButton = styled.button`
-  border-radius: 3px;
+  border-radius: 10px;
   background-color: #7289da;
   border: none;
   box-shadow: none;
