@@ -1,5 +1,135 @@
 import React, { Component } from "react";
 import axios from "axios";
+import styled, { keyframes } from "styled-components";
+
+const bounceInLeft = keyframes`
+from,
+  60%,
+  75%,
+  90%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-150px, 0, 0);
+    transform: translate3d(-150px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(25px, 0, 0);
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+`;
+
+const bounceInRight = keyframes`
+from,
+60%,
+75%,
+90%,
+to {
+  -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+from {
+  opacity: 0;
+  -webkit-transform: translate3d(150px, 0, 0);
+  transform: translate3d(150px, 0, 0);
+}
+
+60% {
+  opacity: 1;
+  -webkit-transform: translate3d(-25px, 0, 0);
+  transform: translate3d(-25px, 0, 0);
+}
+
+75% {
+  -webkit-transform: translate3d(10px, 0, 0);
+  transform: translate3d(10px, 0, 0);
+}
+
+90% {
+  -webkit-transform: translate3d(-5px, 0, 0);
+  transform: translate3d(-5px, 0, 0);
+}
+
+to {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+`;
+
+const FullDiv = styled.div`
+  width: 500px;
+  min-height: 150px;
+  background-color: white;
+  position: absolute;
+  top: calc(50% - 75px);
+  right: calc(50% - 250px);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+`;
+
+const QuoteDiv = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+  padding-bottom: 20px;
+`;
+
+const RealQuoteDiv = styled.div`
+  min-height: 100px;
+  font-family: Open Sans, sans-serif;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  text-align: center;
+`;
+
+const AnimatedText = styled.p`
+  animation: ${bounceInLeft} 1s linear;
+`;
+
+const RandomButton = styled.button`
+  border-radius: 3px;
+  background-color: #7289da;
+  border: none;
+  box-shadow: none;
+  padding: 10px;
+  color: white;
+  font-family: Open Sans, sans-serif;
+  font-size: 15px;
+  width: 200px;
+  cursor: pointer;
+  outline: none;
+  ::-moz-focus-inner {
+    border: 0;
+  }
+`;
 
 class App extends Component {
   // initialize our state
@@ -24,6 +154,7 @@ class App extends Component {
   // changed and implement those changes into our UI
   componentDidMount() {
     this.getDataFromDb();
+    this.getARandomEntry();
     // if (!this.state.intervalIsSet) {
     //   let interval = setInterval(this.getDataFromDb, 1000);
     //   this.setState({ intervalIsSet: interval });
@@ -65,19 +196,29 @@ class App extends Component {
       );
   };
 
+  // AddEmoji(params) {
+  //   const emojiArray = ["🚗", "✈️", "🚀"];
+  //   let randomEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+  //   return randomEmoji;
+  // }
+
   // here is our UI
   // it is easy to understand their functions when you
   // see them render into our screen
   render() {
     const { randomQuote } = this.state;
     return (
-      <div>
-        <div style={{ padding: "10px" }}>
-          {randomQuote}
+      <FullDiv>
+        <QuoteDiv>
+          <RealQuoteDiv>
+            <AnimatedText>{randomQuote || "Feeling luckyyy"}</AnimatedText>
+          </RealQuoteDiv>
           <br />
-          <button onClick={() => this.getARandomEntry()}>Random</button>
-        </div>
-      </div>
+          <RandomButton onClick={() => this.getARandomEntry()}>
+            Get a random quote
+          </RandomButton>
+        </QuoteDiv>
+      </FullDiv>
     );
   }
 }
