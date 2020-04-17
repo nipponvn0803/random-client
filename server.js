@@ -15,9 +15,7 @@ const router = express.Router();
 app.use(express.static(path.join(__dirname, "client/build")));
 
 // this is our MongoDB database
-// const dbRoute = process.env.MONGODB_URI;
-const dbRoute =
-  "mongodb+srv://caoson:hikzDFBB@text-query-mmjwm.mongodb.net/test?retryWrites=true&w=majority";
+const dbRoute = process.env.MONGODB_URI;
 
 // connects our back end code with the database
 mongoose.connect(dbRoute, { useNewUrlParser: true });
